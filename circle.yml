@@ -1,0 +1,54 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.2
+
+    steps:
+      - setup_remote_docker:
+          version: 17.10.0-ce
+
+      - checkout
+
+      - run:
+          name: Environment setup
+          command: |
+            cat > $BASH_ENV <<- EOM
+              export VERSION="0.1.${CIRCLE_BUILD_NUM}"
+              # export DOCKER_IMAGE="repository/yourimage"
+              # export AWS_DEFAULT_OUTPUT=json
+              # export AWS_DEFAULT_REGION=eu-west-2
+            EOM
+
+            # sudo apt-get install -y jq python3-dev python3-pip
+
+            # sudo pip3 install awscli --upgrade
+
+            # aws --version
+
+      - restore_cache:
+          keys:
+            - theapp-v1-{{ checksum "yarn.lock" }}-{{ checksum "elm-package.json" }}
+
+      - run: ./build.sh
+      - run: ./test.sh
+
+      - store_artifacts:
+          path: reports
+          destination: reports
+
+      - store_test_results:
+          path: reports/
+
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              ./publish.sh "${DOCKER_IMAGE}" "${VERSION}"
+            fi
+
+      - save_cache:
+          key: theapp-v1-{{ checksum "yarn.lock" }}-{{ checksum "elm-package.json" }}
+          paths:
+            - node_modules
+            - elm-stuff
+

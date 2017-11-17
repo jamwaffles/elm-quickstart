@@ -1,0 +1,41 @@
+{
+  "name": "elm-quickstart",
+  "version": "0.1.0",
+  "description": "Elm quickstart app",
+  "main": "index.js",
+  "author": "James Waples",
+  "license": "None",
+  "private": true,
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "chai": "^4.1.2",
+    "elm": "^0.18.0",
+    "eslint": "^4.11.0",
+    "mocha": "^4.0.1",
+    "mocha-multi-reporters": "^1.1.6",
+    "nyc": "^11.3.0",
+    "uglify-js": "^3.1.9"
+  },
+  "scripts": {
+    "start": "node --experimental-modules index.mjs",
+    "build": "elm-make src/Main.elm --yes --output public/js/main.js",
+    "minify": "uglifyjs --compress --mangle --source-map --output public/js/main.js public/js/main.js",
+    "test": "mocha",
+    "coverage": "nyc mocha",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">= 9.2",
+    "npm": ">= 5.5"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-favicon": "^2.0.0",
+    "koa-router": "^7.3.0",
+    "koa-static": "^4.0.2",
+    "winston": "^2.4.0"
+  }
+}

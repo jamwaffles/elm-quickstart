@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    # image: theimage:latest
+    build:
+      context: .
+    environment:
+      - PORT=2727
+    ports:
+      - "2727:2727"

@@ -1,0 +1,6 @@
+elm-stuff
+public/js
+reports
+node_modules
+.nyc_output
+.env
