@@ -1,5 +1,12 @@
 import winston from 'winston'
 
-winston.cli()
+import config from './config'
+
+winston.level = config('LOG_LEVEL') || 'info'
+
+if(process.stdout.isTTY) {
+  // Pretty colours
+  winston.cli()
+}
 
 export default winston
