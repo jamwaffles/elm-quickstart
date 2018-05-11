@@ -14,6 +14,7 @@ rules:
   arrow-body-style: "error"
   padded-blocks: [ "error", "never" ]
   jsx-quotes: [ "error", "prefer-double" ]
+  require-await: [ "error" ]
 env:
   node: true
   browser: true
